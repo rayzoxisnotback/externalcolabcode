@@ -83,6 +83,35 @@ def run_script():
                     changes_made = True
                 line = new_line
 
+                
+                if "if_cache_gpu17 = gr.Checkbox(" in second_previous_line and "value=False," in line:
+                    new_line = line.replace("value=False,", "value=True,")
+                    if new_line != line:
+                        print("Replaced 'value=False,' with 'value=True,' based on the condition")
+                        changes_made = True
+                    line = new_line
+
+                if 'label=i18n("输入训练文件夹路径"),' in previous_line:
+                    new_line = 'value="/content/dataset/",'
+                    if new_line != line:
+                        print("Replaced 'value=\"/content/Retrieval-based-Voice-Conversion-WebUI\\\\datasets\\\\\" with 'value=\"/content/dataset/\"'")
+                        changes_made = True
+                    line = new_line
+
+                if 'label=i18n("总训练轮数total_epoch"),' in previous_line:
+                    new_line = 'value=10000,'
+                    if new_line != line:
+                        print("Replaced 'value=20,' with 'value=10000,'")
+                        changes_made = True
+                    line = new_line
+
+                if 'label=i18n("保存频率save_every_epoch"),' in previous_line:
+                    new_line = 'value=50,'
+                    if new_line != line:
+                        print("Replaced 'value=5,' with 'value=50,'")
+                        changes_made = True
+                    line = new_line
+
                 if "label=i18n(\"输入源音量包络替换输出音量包络融合比例，越靠近1越使用输出包络\")" in previous_line and "value=1," in line:
                     new_line = line.replace("value=1,", "value=0.25,")
                     if new_line != line:
