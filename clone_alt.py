@@ -63,12 +63,72 @@ def run_script():
                             changes_made = True
                         line = new_line
 
+                # Change Sample Rate by 48k
+                if 'value="40k",' in line:
+                    new_line = line.replace('value="40k",', 'value="48k",')
+                    if new_line != line:
+                        print("Replaced 'value=\"40k\",' with 'value=\"48k\",' based on the DEFAULT SAMPLE RATE !")
+                        changes_made = true
+                    line = new_line
+
+                # Change Version by V2
+                if 'value="v1",' in line:
+                    new_line = line.replace('value="v1",', 'value="v2",')
+                    if new_line != line:
+                        print("Replaced 'value=\"v1\",' with value=\"v2\",' based on the DEFAULT VERSION !")
+                        changes_made = True
+                    line = new_line
+
+                # Change Maximum Max Batch Size
                 if "maximum=40," in line:
                     new_line = line.replace("maximum=40,", "maximum=80,")
                     if new_line != line:
                         print("Replaced 'maximum=40,' with 'maximum=80,' based on the MAX BATCH SIZE !")
                         changes_made = True
                     line = new_line
+
+                # Change Maximum Save Every Epoch
+                if "maximum=50," in line:
+                    new_line = line.replace("maximum=50,", "maximum=1000,")
+                    if new_line != line:
+                        print("Replaced 'maximum=50,' with 'maximum=1000,' based on the SAVE EVERY EPOCH !")
+                        changes_made = True
+                    line = new_line
+
+                # Change pretrained v2 path G
+                if 'value="pretrained/f0G40k.pth",' in line:
+                    new_line = line.replace('value="pretrained/f0G40k.pth",','value="pretrained_v2/f0G48k.pth",')
+                    if new_line != line:
+                        print("Replaced 'value=\"pretrained/f0G40k.pth\"' with 'value=\"pretrained_v2/f0G48k.pth\"' based on the G Path")
+                        changes_made = True
+                    line = new_line
+
+                # Change pretrained v2 path D
+                if 'value="pretrained/f0D40k.pth",' in line:
+                    new_line = line.replace('value="pretrained/f0D40k.pth",','value="pretrained_v2/f0D48k.pth",')
+                    if new_line != line:
+                        print("Replaced 'value=\"pretrained/f0D40k.pth\"' with 'value=\"pretrained_v2/f0D48k.pth\"' based on the D Path")
+                        changes_made = True
+                    line = new_line
+
+                # Check Cache all Training
+                if 'label="Cache all training sets to GPU memory. Caching small datasets (less than 10 minutes) can speed up training, but caching large datasets will consume a lot of GPU memory and may not provide much speed improvement",' in previous_line:
+                    if 'value=False,' in line:
+                        new_line = line.replace('value=False,','value=True,')
+                        if new_line != line:
+                            print("Replaced 'value=False,' with 'value=True,' based on the Cache All Training")
+                            changes_made = True
+                        line = new_line
+
+                # Change dataset path
+                if 'value="/content/Retrieval-based-Voice-Conversion-WebUI\\\\datasets\\\\"' in line:
+                    new_line = line.replace('value="/content/Retrieval-based-Voice-Conversion-WebUI\\\\datasets\\\\"', 'value="/content/dataset/"')
+                    if new_line != line:
+                        print("Replaced 'value=\"/content/Retrieval-based-Voice-Conversion-WebUI\\\\datasets\\\\\" with 'value=\"/content/dataset/\"' based on the dataset path")
+                        changes_made = True
+                    line = new_line
+                
+                
 
                 new_line = line.replace('label=i18n("输入训练文件夹路径"), value="E:\\\\语音音频+标注\\\\米津玄师\\\\src"', 'label=i18n("输入训练文件夹路径"), value="/content/dataset/"')
                 if new_line != line:
