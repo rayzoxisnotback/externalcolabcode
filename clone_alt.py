@@ -63,6 +63,13 @@ def run_script():
                             changes_made = True
                         line = new_line
 
+                if "maximum=40," in line:
+                    new_line = line.replace("maximum=40,", "maximum=80,")
+                    if new_line != line:
+                        print("Replaced 'maximum=40,' with 'maximum=80,' based on the MAX BATCH SIZE !")
+                        changes_made = True
+                    line = new_line
+
                 new_line = line.replace('label=i18n("输入训练文件夹路径"), value="E:\\\\语音音频+标注\\\\米津玄师\\\\src"', 'label=i18n("输入训练文件夹路径"), value="/content/dataset/"')
                 if new_line != line:
                     print("Replaced 'label=i18n(\"输入训练文件夹路径\"), value=\"E:\\\\语音音频+标注\\\\米津玄师\\\\src\"' with 'label=i18n(\"输入训练文件夹路径\"), value=\"/content/dataset/\"'")
