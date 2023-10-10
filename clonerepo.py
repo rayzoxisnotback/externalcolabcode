@@ -41,6 +41,12 @@ def run_script():
                     changes_made = True
                 line = new_line
 
+                new_line = line.replace("i18n = I18nAuto()", "i18n = I18nAuto('fr_FR')")
+                if new_line != line:
+                    print("Replaced 'i18n = I18nAuto()' with 'i18n = I18nAuto('fr_FR')'")
+                    changes_made = True
+                line = new_line
+
                 new_line = line.replace('value="40k",', 'value="48k",')
                 if new_line != line:
                     print("Replaced 'value=\"40k\",' with 'value=\"48k\",'")
